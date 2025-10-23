@@ -1,12 +1,282 @@
-(defwindow example
-           :monitor 0
-           :geometry (geometry :x "0%"
-                               :y "20px"
-                               :width "50px"
-                               :height "30px"
-                               :anchor "left center")
-           :stacking "fg"
-           :windowtype "normal"
-           :focusable true
-           :wm-ignore false
-  "example content")
+(defvar power false)
+
+(defwindow bar
+  :monitor '["primary", "DisplayPort-8", 0]'
+  :windowtype "dock"
+  :stacking "fg"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :anchor "top left")
+  :reserve (struts :side "top" :distance "4%")
+  (box
+    (box
+      :halign "start"
+      :space-evenly false
+      (tray-win)
+      (music-win)
+      (workspaces-win)
+    )
+    (box
+      :space-evenly false
+      :halign "end"
+      (specs-win)
+      (date-win)
+      (power-win)
+      )
+  )
+)
+
+(defwidget workspaces-win []
+  (box :space-evenly false :class "workspaces" :valign "center"
+    (for ws in workspace-data
+      (box
+        :class `workspace-box shadow ${ws.Focused == true ? "focused" : ""}`
+        (eventbox 
+          :class "workspace-eventbox"
+          :cursor "pointer"
+          (button 
+            :onclick "scripts/switch_workspace_by_name.sh \"${ws.Name}\""
+            (box
+              :class "workspace-icons"
+             "${ws.Name}"
+              (for app in {ws.Apps}
+                (button	:style "background-image: url('${app.Icon}');")
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  )
+
+(defwidget tray-win []
+  (box :space-evenly false :class "tray-box content-box shadow" :valign "center"
+        (systemtray)
+      )
+  )
+
+(defwidget music-win []
+  (box 
+    :visible { music != ""}
+    :space-evenly false :class "content-box music-box" :valign "center"
+        (music)
+      )
+  )
+
+(defwidget specs-win []
+  (box :space-evenly false :class "content-box shadow" :valign "center"
+    (wifi)
+    (button
+      :onclick "scripts/togglemute.sh"
+      (metric :label "${muted == "[on]" ? "🔊" : "🔇"}"
+              :value volume
+              :tooltip volume
+              :onchange "amixer -D pulse sset Master {}%"
+        )
+      )
+    
+    (metric :label "💿"
+            :value {EWW_RAM.used_mem_perc}
+            :tooltip "${round(EWW_RAM.used_mem / 1000000000, 2)} / ${round(EWW_RAM.total_mem / 1000000000, 2)}"
+            :onchange "")
+    (battery)
+      )
+  )
+
+(defwidget date-win []
+  (box :space-evenly false :class "content-box shadow" :valign "center"
+        (datetime)
+      )
+  )
+
+(defwidget power-win []
+    (powermenu)
+)
+
+(defwidget datetime []
+  (box :class "datetime" :orientation "h" :halign "start" :valign "center" :space-evenly false
+    (box :class "datetime-time" :orientation "v" :space-evenly false
+        (label :class "datetime-hour" :text hours :halign "start")
+        (label :class "datetime-minute" :text minutes :halign "start")
+      )
+
+    (box :class "datetime-date" :orientation "v" :space-evenly false
+        (label :class "datetime-day" :text date :halign "start")
+        (label :class "" :text datemonth :halign "start")
+      )
+  ))
+
+(defwidget battery []
+    ; TODO: Charging status
+    (box :orientation "h" 
+         :visible { EWW_BATTERY != "" } 
+         :class "metric"
+		 :tooltip "${EWW_BATTERY}"
+         :space-evenly false
+          (box :class "label" "🔋")
+          (scale :min 0
+                 :max 100
+                 :value {EWW_BATTERY.BAT1.capacity == "" ? 0 : EWW_BATTERY.BAT1.capacity}
+                 )
+      ))
+
+(defwidget wifi []
+	(box :orientation "v"
+		(eventbox :cursor "pointer"
+			(button
+					:class "trayicon"
+					:tooltip "${NETSTAT}"
+              (box :orientation "h" :class "networkbutton" :spacing 5 :space-evenly false
+                (image 
+                  :path WIFIICON 
+                  :image-width 24 
+                  :image-height 24)
+                NETSTAT
+              )
+			)
+		)
+	)
+)
+
+
+(defwidget music []
+  (box
+    :visible { music != ""}
+    :space-evenly false
+    (box :class "music"
+         :space-evenly false
+        (image :class "music-image" :path "images/compact-disc.png" :image-height 50 :valign "center")
+        (box 
+         :orientation "v"
+         :space-evenly false
+         :halign "start"
+        :valign "center"
+        (label :class "music-artist" :text "${music.artist}" :halign "start")
+        (label :class "music-title" :text "${music.title}" :truncate true :limit-width 30 :halign "start")
+      )
+    )
+    (box 
+      :class "music-controls" 
+      :space-evenly false
+      :valign "center"
+      (eventbox :cursor "pointer"
+        (button 
+              :class "music-control-button"
+              :style "background-image: url('images/rewind.png');"
+              :tooltip "Previous"
+              :onclick "playerctl previous"))
+      (eventbox :cursor "pointer"
+        (button 
+              :class "music-control-button"
+              :style "background-image: url('images/play-button.png');"
+              :tooltip "Play"
+              :onclick "playerctl play-pause"))
+      (eventbox :cursor "pointer"
+        (button 
+              :class "music-control-button"
+              :style "background-image: url('images/fast-forward.png');"
+              :tooltip "Next"
+              :onclick "playerctl next"))
+      )
+  )
+)
+
+
+(defwidget metric [label value tooltip onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" :tooltip tooltip label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+(defwidget systemtray []
+  (box :orientation "v" :halign "start"
+    (systray :class "tray" :orientation "h" :icon-size 24 :spacing 5)
+  )
+)
+
+(defwidget powermenu []
+  (box :orientation "v" :halign "start" :class "powermenu-wrap" :space-evenly false
+	(eventbox	:onhover "${EWW_CMD} update power=true"
+				:onhoverlost "${EWW_CMD} update power=false"
+				:cursor "pointer"
+
+	(box	:orientation "h"
+			:space-evenly false
+			:vexpand false
+			:class "powermenu"
+
+	(revealer	:transition "slideleft"
+				:reveal power
+				:duration "550ms"
+
+	(box	:orientation "h"
+			:space-evenly false
+
+      ; Commented for now due to it being quite broken
+	; (button	:style "background-image: url('images/exit.png');"
+	; 		:class "powermenu-button"
+	; 		:tooltip "Log out"
+	; 		:onclick "qdbus org.kde.Shutdown /Shutdown logout")
+
+	(button	:style "background-image: url('images/padlock.png');"
+			:class "powermenu-button"
+			:tooltip "Lock Screen"
+			:onclick "sudo -i loginctl lock-sessions")
+
+	(button :style "background-image: url('images/moon.png');"
+			:class "powermenu-button"
+			:tooltip "Suspend computer"
+			:onclick "systemctl suspend")
+
+	(button	:style "background-image: url('images/restart.png');"
+			:class "powermenu-button"
+	  		:tooltip "Reboot"
+			:onclick "reboot")
+    ))
+
+	(button	:style "background-image: url('images/power-button.png');"
+			:class "powermenu-button powermenu-main-button"
+			:tooltip "Power Menu"
+            :onclick "shutdown now"
+      ))
+    )
+))
+
+;;; Polls
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{ \"artist\": \"{{ artist }}\", \"title\": \"{{ title }}\", \"image\": \"{{ mpris:artUrl }}\"  }' || true")
+
+(defpoll volume :interval "1s"
+  "scripts/getvol.sh")
+
+(defpoll muted :interval "1s"
+  "scripts/getmuted.sh")
+
+(defpoll currentworkspaces :interval "1s"
+   "scripts/workspaces.sh")
+
+(defpoll workspace-data :interval "1s"
+  "scripts/go/workspaces/main")
+
+(defpoll date :interval "10s"
+  "date '+%A'")
+
+(defpoll datemonth :interval "10s"
+  "date '+%d. %B'")
+
+(defpoll hours :interval "10s"
+  "date '+%H'")
+
+(defpoll minutes :interval "10s"
+  "date '+%M'")
+
+;; Network
+(defpoll WIFIICON :interval "15s" `scripts/network.sh --icon`)
+(defpoll NETSTAT :interval "15s" `scripts/network.sh --stat`)
