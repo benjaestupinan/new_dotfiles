@@ -1,0 +1,27 @@
+configuration {
+    modi: "drun,run";
+    show-icons: true;
+}
+
+//@theme "gruvbox-dark"
+
+* {
+    background: #282828;
+    foreground: #ebdbb2;
+    selected-background: #458588;
+    selected-foreground: #ebdbb2;
+    font: "mono 10";
+    border-radius: 25px;
+}
+
+element {
+    padding: 1px 2px;
+}
+
+element selected {
+    padding: 2px 4px;
+}
+//@theme "/home/benjaestupinan/.local/share/rofi/themes/rounded-nord-dark.rasi"
+//@theme "/home/benjaestupinan/.local/share/rofi/themes/catppuccin-lavrent-mocha.rasi"
+
+@theme "/home/benjaestupinan/.local/share/rofi/themes/themes/simple-tokyonight.rasi"
