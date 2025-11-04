@@ -21,7 +21,7 @@ client.focused_inactive #2e3440 #2e3440 #d8dee9 #2e3440 #88c0d0
 client.unfocused        #2e3440 #2e3440 #d8dee9 #2e3440 #88c0d0
 client.urgent           #bf616a #bf616a #d8dee9 #bf616a #bf616a
 
-# 🧱 Barra de estado de i3
+#  Barra de estado de i3
 #bar {
     #status_command polybar goated
     #position top
