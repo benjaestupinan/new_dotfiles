@@ -1,7 +1,3 @@
--- Líder
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 -- Telescope (solo si existe)
 vim.keymap.set('n', '<C-p>', function()
   local ok, builtin = pcall(require, 'telescope.builtin')
@@ -21,3 +17,4 @@ vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Documentación flotante' }
 vim.keymap.set('n', 'gd', vim.lsp.buf.implementation, { desc = 'Ir a implementación' })
 vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code actions' })
 vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format, { desc = 'Formatear buffer' })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Mostrar diagnóstico flotante" })
