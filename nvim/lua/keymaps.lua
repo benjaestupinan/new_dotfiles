@@ -2,13 +2,16 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- === General ===
--- === Telescope ===
-local ok, telescope = pcall(require, 'telescope.builtin')
-if ok then
-  vim.keymap.set('n', '<C-p>', telescope.find_files, { desc = 'Buscar archivos' })
-  vim.keymap.set('n', '<C-S-f>', telescope.live_grep, { desc = 'Buscar texto' })
-end
+-- Telescope (solo si existe)
+vim.keymap.set('n', '<C-p>', function()
+  local ok, builtin = pcall(require, 'telescope.builtin')
+  if ok then builtin.find_files() end
+end, { desc = 'Buscar archivos' })
+
+vim.keymap.set('n', '<C-S-f>', function()
+  local ok, builtin = pcall(require, 'telescope.builtin')
+  if ok then builtin.live_grep() end
+end, { desc = 'Buscar texto' })
 
 -- === Neo-tree ===
 vim.keymap.set('n', '<C-b>', ':Neotree filesystem reveal toggle<CR>', { desc = 'Abrir árbol de archivos' })
