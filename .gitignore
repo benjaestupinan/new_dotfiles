@@ -1,5 +1,6 @@
 # extra configs unrelated to the ricing
 
+./xfce4/xfconf/xfce-perchannel-xml/thunar.xml
 flameshot
 fontforge
 go
