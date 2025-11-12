@@ -183,7 +183,7 @@ client.focused       #89ddff     #89ddff    #89ddff    #89ddff       #89ddff
 client.unfocused     #222222     #222222    #222222    #222222       #222222
 
 # Gaps
-gaps inner 10
+gaps inner 7
 gaps outer 5
 smart_gaps on
 
