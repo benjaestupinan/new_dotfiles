@@ -48,8 +48,6 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
-window-height = 30
-window-width = 110
 
 theme = TokyoNight Moon 
 

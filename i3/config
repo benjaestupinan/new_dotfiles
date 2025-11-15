@@ -46,11 +46,8 @@ exec_always --no-startup-id picom
 # fondo de pantalla
 exec_always feh --bg-fill ~/Pictures/landscape_wallpaper.jpg
 
-# conky (data de fondo de pantalla)
-# exec_always --no-startup-id conky -c ~/.config/conky/dashboard.conf
-# for_window [class="Conky"] floating disable
-# for_window [class="Conky"] border pixel 0
-
+for_window [class="ghostty"] floating enable
+for_window [class="org.gnome.Nautilus"] floating enable
 
 # Ajuste del touchpad: activar scroll natural
 exec --no-startup-id xinput set-prop "ELAN06FA:00 04F3:327E Touchpad" "libinput Natural Scrolling Enabled" 1
