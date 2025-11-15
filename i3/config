@@ -46,7 +46,7 @@ exec_always --no-startup-id picom
 # fondo de pantalla
 exec_always feh --bg-fill ~/Pictures/landscape_wallpaper.jpg
 
-for_window [class="ghostty"] floating enable
+for_window [class="ghostty"] floating enable, resize set width 60 ppt height 60 ppt, move position center
 for_window [class="org.gnome.Nautilus"] floating enable
 
 # Ajuste del touchpad: activar scroll natural
