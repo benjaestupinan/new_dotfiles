@@ -14,7 +14,7 @@ vim.keymap.set('n', '<C-b>', ':Neotree filesystem reveal toggle<CR>', { desc = '
 
 -- === LSP ===
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Documentación flotante' })
-vim.keymap.set('n', 'gd', vim.lsp.buf.implementation, { desc = 'Ir a implementación' })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Ir a implementación' })
 vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code actions' })
 vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format, { desc = 'Formatear buffer' })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Mostrar diagnóstico flotante" })
