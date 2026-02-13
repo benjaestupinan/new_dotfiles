@@ -22,3 +22,15 @@ vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Mostrar di
 -- === NVIM ===
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
+
+-- === BARBAR ===
+vim.keymap.set('n', '<C-1>', ':BufferGoto 1<CR>')
+vim.keymap.set('n', '<C-2>', ':BufferGoto 2<CR>')
+vim.keymap.set('n', '<C-3>', ':BufferGoto 3<CR>')
+vim.keymap.set('n', '<C-4>', ':BufferGoto 4<CR>')
+vim.keymap.set('n', '<C-5>', ':BufferGoto 5<CR>')
+vim.keymap.set('n', '<C-6>', ':BufferGoto 6<CR>')
+vim.keymap.set('n', '<C-7>', ':BufferGoto 7<CR>')
+vim.keymap.set('n', '<C-8>', ':BufferGoto 8<CR>')
+vim.keymap.set('n', '<C-9>', ':BufferGoto 9<CR>')
+vim.keymap.set('n', '<C-q>', ':BufferClose<CR>')
