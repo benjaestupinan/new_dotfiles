@@ -21,8 +21,8 @@ return {
         signs_staged_enable = true,
         signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
         numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
-        linehl     = true, -- Toggle with `:Gitsigns toggle_linehl`
-        word_diff  = true, -- Toggle with `:Gitsigns toggle_word_diff`
+        linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+        word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = {
           follow_files = true
         },
@@ -33,7 +33,7 @@ return {
           virt_text = true,
           virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
           delay = 1000,
-          ignore_whitespace = false,
+          ignore_whitespace = true,
           virt_text_priority = 100,
           use_focus = true,
         },
