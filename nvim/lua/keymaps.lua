@@ -12,6 +12,9 @@ end, { desc = 'Buscar texto' })
 -- === Neo-tree ===
 vim.keymap.set('n', '<C-b>', ':Neotree filesystem position=float reveal dir=./ toggle<CR>', { desc = 'Abrir árbol de archivos' })
 
+-- === Oil ===
+vim.keymap.set('n', '<C-S-b>', ':Oil --float .<CR>', { desc = 'Abrir árbol de archivos' })
+
 -- === LSP ===
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Documentación flotante' })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Ir a implementación' })
