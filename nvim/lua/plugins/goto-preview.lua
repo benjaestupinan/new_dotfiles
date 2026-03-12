@@ -9,7 +9,7 @@ return {
       default_mappings = false, -- importante: usamos tus keymaps
       debug = false,
       opacity = 0,
-      resizing_mappings = true,
+      resizing_mappings = false,
       post_open_hook = nil,
     })
   end,
