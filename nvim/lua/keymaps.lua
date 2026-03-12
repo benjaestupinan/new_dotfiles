@@ -37,3 +37,7 @@ vim.keymap.set('n', '<C-7>', ':BufferGoto 7<CR>')
 vim.keymap.set('n', '<C-8>', ':BufferGoto 8<CR>')
 vim.keymap.set('n', '<C-9>', ':BufferGoto 9<CR>')
 vim.keymap.set('n', '<C-q>', ':BufferClose<CR>')
+
+-- === Gitsigns ===
+vim.keymap.set('n', ']g', ':Gitsigns nav_hunk next<CR>')
+vim.keymap.set('n', 'gph', ':Gitsigns preview_hunk<CR>')
