@@ -41,3 +41,10 @@ vim.keymap.set('n', '<C-q>', ':BufferClose<CR>')
 -- === Gitsigns ===
 vim.keymap.set('n', ']g', ':Gitsigns nav_hunk next<CR>')
 vim.keymap.set('n', 'gph', ':Gitsigns preview_hunk<CR>')
+
+-- == GotoPreview ===
+vim.keymap.set("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { desc = "Preview definition" })
+vim.keymap.set("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", { desc = "Preview type" })
+vim.keymap.set("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", { desc = "Preview implementation" })
+vim.keymap.set("n", "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", { desc = "Preview references" })
+vim.keymap.set("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", { desc = "Close previews" })
