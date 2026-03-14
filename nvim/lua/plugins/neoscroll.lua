@@ -1,6 +1,6 @@
 return {
   "karb94/neoscroll.nvim",
   opts = {
-    mappings = {}
+    mappings = { "<C-u>", "<C-d>", "zt", "zz", "zb" }
   },
 }
