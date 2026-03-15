@@ -57,6 +57,7 @@ window-title-font-family = "MonoLisa Variable"
 
 font-size = 18
 font-family = "FiraCode Nerd Font"
+font-style = "SemiBold"
 background-opacity = 0.95
 
 window-padding-x = 10
