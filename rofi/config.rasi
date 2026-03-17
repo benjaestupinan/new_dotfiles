@@ -1,27 +1,34 @@
 configuration {
     modi: "drun,run";
     show-icons: true;
+
+    font: "Envy Code R 10";
+    line-margin: 10;
+
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+    show-icons:     true;
 }
 
-//@theme "gruvbox-dark"
 
-* {
-    background: #282828;
-    foreground: #ebdbb2;
-    selected-background: #458588;
-    selected-foreground: #ebdbb2;
-    font: "mono 10";
-    border-radius: 25px;
+@theme "~/.config/rofi/nord.rasi"
+
+listview {
+	lines: 6;
+	columns: 1;
+}
+
+window {
+  width: 560px;
 }
 
 element {
-    padding: 1px 2px;
+  padding: 1px 2px;
 }
 
 element selected {
-    padding: 2px 4px;
+  padding: 2px 4px;
 }
-//@theme "/home/benjaestupinan/.local/share/rofi/themes/rounded-nord-dark.rasi"
-//@theme "/home/benjaestupinan/.local/share/rofi/themes/catppuccin-lavrent-mocha.rasi"
-
-@theme "/home/benjaestupinan/.local/share/rofi/themes/themes/simple-tokyonight.rasi"
