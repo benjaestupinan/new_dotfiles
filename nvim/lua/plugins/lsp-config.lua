@@ -18,6 +18,41 @@ return {
 		lazy = false,
 		opts = {
 			auto_install = true,
+			handlers = {
+				function(server_name)
+					vim.lsp.config(server_name, {
+						capabilities = require("cmp_nvim_lsp").default_capabilities(),
+					})
+					vim.lsp.enable(server_name)
+				end,
+				ruff = function() end,
+				pylsp = function()
+					vim.lsp.config("pylsp", {
+						capabilities = require("cmp_nvim_lsp").default_capabilities(),
+						settings = {
+							pylsp = {
+								plugins = {
+									pyflakes = { enabled = false },
+									pycodestyle = { enabled = false },
+									autopep8 = { enabled = false },
+									yapf = { enabled = false },
+									mccabe = { enabled = false },
+									pylsp_isort = { enabled = false },
+									pylint = { enabled = false },
+									ruff = { enabled = true, formatEnabled = true },
+									pylsp_mypy = { enabled = true, live_mode = false },
+									jedi_completion = { enabled = true },
+									jedi_hover = { enabled = true },
+									jedi_references = { enabled = true },
+									jedi_signature_help = { enabled = true },
+									jedi_symbols = { enabled = true },
+								},
+							},
+						},
+					})
+					vim.lsp.enable("pylsp")
+				end,
+			},
 		},
 	},
 	{
@@ -53,7 +88,6 @@ return {
 			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 			})
-
 		end,
 	},
 }
