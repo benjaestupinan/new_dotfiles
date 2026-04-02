@@ -55,10 +55,10 @@ title = "One does not simply walk into mordor"
 
 window-title-font-family = "MonoLisa Variable"
 
-font-size = 18
+font-size = 14
 font-family = "FiraCode Nerd Font"
 font-style = "SemiBold"
-background-opacity = 1
+background-opacity = 0.95
 
 window-padding-x = 10
 window-padding-y = 10
