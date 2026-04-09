@@ -63,5 +63,6 @@ background-opacity = 0.95
 window-padding-x = 10
 window-padding-y = 10
 
+clipboard-paste-protection = false
 
 window-decoration = false
