@@ -1,12 +1,18 @@
 return {
-  {
-    'hrsh7th/cmp-nvim-lsp',
-  },
+	{
+		"hrsh7th/cmp-nvim-lsp",
+	},
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
+		},
+	},
+	{
+		"dcampos/cmp-emmet-vim",
+		dependencies = {
+			"mattn/emmet-vim",
 		},
 	},
 	{
@@ -22,11 +28,11 @@ return {
 				},
 				window = {
 					completion = cmp.config.window.bordered({
-            border = "rounded"
-          }),
+						border = "rounded",
+					}),
 					documentation = cmp.config.window.bordered({
-            border = "rounded"
-          }),
+						border = "rounded",
+					}),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -37,7 +43,8 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- For luasnip users.
+					{ name = "luasnip" },
+					{ name = "emmet_vim", priority = 900 },
 				}, {
 					{ name = "buffer" },
 				}),
