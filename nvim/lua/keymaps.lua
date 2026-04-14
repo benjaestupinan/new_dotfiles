@@ -25,7 +25,9 @@ vim.keymap.set(
 vim.keymap.set("n", "<C-S-b>", ":Oil --float .<CR>", { desc = "Abrir árbol de archivos" })
 
 -- === LSP ===
-vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Documentación flotante" })
+vim.keymap.set("n", "K", function()
+	vim.lsp.buf.hover({ border = "rounded", max_height = 25, max_width = 120, focusable = false })
+end, { desc = "Hover documentation" })
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Ir a implementación" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Formatear buffer" })

@@ -62,7 +62,6 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			-- Configuración global de diagnóstico (igual que antes)
 			vim.diagnostic.config({
 				virtual_text = {
 					source = "always",
