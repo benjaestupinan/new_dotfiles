@@ -2,14 +2,14 @@
 vim.keymap.set("n", "<C-p>", function()
 	local ok, builtin = pcall(require, "telescope.builtin")
 	if ok then
-		builtin.find_files()
+		builtin.find_files(require("telescope.themes").get_dropdown({}))
 	end
 end, { desc = "Buscar archivos" })
 
 vim.keymap.set("n", "<C-S-f>", function()
 	local ok, builtin = pcall(require, "telescope.builtin")
 	if ok then
-		builtin.live_grep()
+		builtin.live_grep(require("telescope.themes").get_dropdown({}))
 	end
 end, { desc = "Buscar texto" })
 
